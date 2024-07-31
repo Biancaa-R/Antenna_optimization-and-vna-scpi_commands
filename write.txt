@@ -1,0 +1,21 @@
+In the context of the RsInstrument library used for controlling the Rohde & Schwarz Vector Network Analyzers, the method `write_str_with_opc` is a specialized function that sends a command string to the instrument and waits for the operation to complete. Here is a breakdown of its components:
+
+1. **`write_str`**: This is a method for sending a command string to the instrument.
+2. **`opc`**: Stands for "Operation Complete". When included, it ensures that the instrument has completed processing the command before moving on to the next operation. 
+
+The `write_str_with_opc` method essentially combines these two functionalities, sending the command and then waiting for an operation complete signal from the instrument.
+
+### Example Usage
+```python
+zna.write_str_with_opc('SENSe1:FREQuency:Start 1e9')  # Set start frequency to 1 GHz
+```
+
+In this example, the command `SENSe1:FREQuency:Start 1e9` is sent to the instrument to set the start frequency to 1 GHz. The `write_str_with_opc` method will then wait until the instrument has completed this operation before proceeding with any further commands.
+
+### Why Use `write_str_with_opc`?
+Using `write_str_with_opc` ensures that the instrument has finished executing the command before any subsequent commands are sent. This is particularly important in sequences where the order and completion of commands are critical, such as in calibration procedures or measurement setups.
+
+### Summary
+- **`write_str_with_opc`**: Sends a command string to the instrument and waits for the operation to complete.
+- **Ensures synchronization**: Ensures that the instrument has finished processing the command before moving on to the next operation.
+- **Use case**: Essential for sequences of commands where the order and completion are critical.
