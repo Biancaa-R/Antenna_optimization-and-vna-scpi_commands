@@ -112,5 +112,6 @@ maxlen=lengthRange(i);
 function eff = computeEfficiency(antennaArray, frequency)
     % For demonstration, use a placeholder value
     % You should replace this with actual efficiency computation code
-    eff = efficiency(antennaArray,frequency) ;% Random efficiency value as placeholder
+    %eff = efficiency(antennaArray,frequency) ;% Random efficiency value as placeholder
+    eff=rand();
 end

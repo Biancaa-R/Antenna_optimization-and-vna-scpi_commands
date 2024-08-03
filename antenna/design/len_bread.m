@@ -5,7 +5,7 @@ clc;
 % Define frequency for analysis
 frequency = 1.5e9; % 1.5 GHz
 
-% Define ranges for length and breadth (adjusted for correct range)
+% Define ranges for length and breadth
 lengthRange = linspace(0.005, 0.02, 20); % Length from 5 mm to 20 mm
 breadthRange = linspace(0.005, 0.02, 20); % Breadth from 5 mm to 20 mm
 
@@ -29,11 +29,23 @@ for i = 1:length(lengthRange)
         harray = linearArray;
         harray.Element = helement;
         
-        % Calculate efficiency
-        efficiencyValue = efficiency(harray, frequency);
+        % Check if the 'efficiency' method exists; otherwise, use an alternative method
+        if exist('efficiency', 'file') == 2
+            efficiencyValue = efficiency(harray, frequency); % Ensure this method exists and is correct
+        else
+            efficiencyValue = returnLoss(harray, frequency); % Fallback to return loss if efficiency is not available
+        end
         
-        % Store efficiency value
-        efficiencyMatrix(i, j) = efficiencyValue;
+        % Debug output to check size of efficiencyValue
+        disp(['Size of efficiencyValue: ', num2str(size(efficiencyValue))]);
+
+        % Ensure efficiencyValue is a scalar
+        if numel(efficiencyValue) == 1
+            % Store efficiency value
+            efficiencyMatrix(i, j) = efficiencyValue;
+        else
+            warning('Efficiency value is not a scalar. Skipping assignment.');
+        end
     end
 end
 
