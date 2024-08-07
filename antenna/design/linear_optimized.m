@@ -40,5 +40,5 @@ function performance = objectiveFunction(dimensions, metalType, frequency)
     performance = efficiency(harray, frequency);
     
     % To maximize efficiency, return the negative value (minimization problem)
-    performance = -performance;
+    %performance = -performance;
 end

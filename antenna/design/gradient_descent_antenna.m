@@ -75,7 +75,7 @@ disp('Optimal Dimensions (Length, Width):');
 disp(dimensions);
 disp('Optimal Efficiency:');
 try
-    disp(-objectiveFunction(dimensions, frequency));
+    disp(objectiveFunction(dimensions, frequency));
 catch ME
     disp('Error in final objective function evaluation:');
     disp(ME.message);
@@ -112,8 +112,9 @@ function performance = objectiveFunction(dimensions, frequency)
     % Analyze the antenna
     try
         % Calculate the gain at the specified frequency
-        patternData = pattern(harray, frequency, 0, 0); % Gain at broadside (0 degrees azimuth, 0 degrees elevation)
-        performance = -max(patternData); % Negative gain to maximize
+        %patternData = pattern(harray, frequency, 0, 0); % Gain at broadside (0 degrees azimuth, 0 degrees elevation)
+        %performance = -max(patternData); % Negative gain to maximize
+        performance=efficiency(harray,frequency);
     catch ME
         disp('Error during efficiency calculation:');
         disp(ME.message);
