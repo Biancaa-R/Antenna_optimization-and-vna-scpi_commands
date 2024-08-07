@@ -29,10 +29,7 @@ helement.FeedOffset = [0, 0]; % Center feed for simplicity, adjust if needed
 % Define the linear array using the patch element
 harray = linearArray;
 harray.Element = helement;
-
-% Calculate and display the efficiency at 1.5 GHz
-frequency = 1.5e9; % 1.5 GHz
-E = efficiency(harray,frequency);
-disp(class(helement));
-disp(class(harray));
-disp(E);
+disp("minimum impedance :");
+disp(min);
+disp("Occuring freqency");
+disp(freq);
