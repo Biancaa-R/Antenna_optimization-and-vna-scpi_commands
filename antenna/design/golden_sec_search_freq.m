@@ -3,8 +3,8 @@ clear all;
 close all;
 
 % Fixed length and width
-len = 10^0.43; % Actual length value
-bre = 10^0.67; % Actual width value
+len = 0.43; % Actual length value
+bre = 0.67; % Actual width value
 
 % Golden-Section Search parameters
 tol = 1e-4; % Tolerance
@@ -14,28 +14,41 @@ gr = (sqrt(5) + 1) / 2; % Golden ratio
 a = 1e9; % Lower bound
 b = 3e9; % Upper bound
 
+x=gr*(b-a);
+
 % Initial points
-c = b - (b - a) / gr;
-d = a + (b - a) / gr;
+c = a+x;
+d = b-x;
 
 % Calculate efficiency at initial points
 fc = calculate_efficiency(len, bre, c);
 fd = calculate_efficiency(len, bre, d);
 iterations = 0;
-maxiter = 100;
+maxiter = 10;
 
 while abs(c - d) > tol && iterations < maxiter
     if fc > fd
-        b = d;
-        d = c;
-        c = b - (b - a) / gr;
-        fd = fc;
+        %b = d;
+        %d = c;
+        %c = b - (b - a) / gr;
+        %fd = fc;
+        a=d;
+        d=c;
+        x=gr*(b-a);
+        c=a+x;
         fc = calculate_efficiency(len, bre, c);
+        fd = calculate_efficiency(len, bre, d);
     else
-        a = c;
-        c = d;
-        d = a + (b - a) / gr;
-        fc = fd;
+        %a = c;
+        %c = d;
+        %d = a + (b - a) / gr;
+        %fc = fd;
+        %fd = calculate_efficiency(len, bre, d);
+        b=c;
+        c=d;
+        x=gr*(b-a);
+        d=b-x;
+        fc = calculate_efficiency(len, bre, c);
         fd = calculate_efficiency(len, bre, d);
     end
     iterations = iterations + 1;

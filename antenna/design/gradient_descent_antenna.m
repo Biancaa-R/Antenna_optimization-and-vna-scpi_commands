@@ -38,7 +38,7 @@ for iter = 1:maxIterations
     end
     
     % Store the current performance
-    performanceHistory(iter) = -currentPerformance;
+    performanceHistory(iter) = currentPerformance;
     
     % Compute gradients (numerical approximation)
     grad = zeros(1, 2);
@@ -58,7 +58,7 @@ for iter = 1:maxIterations
     end
     
     % Update parameters
-    dimensions = dimensions - learningRate * grad;
+    dimensions = dimensions + learningRate * grad;
     
     % Ensure dimensions stay within bounds
     dimensions = max(lb, min(ub, dimensions));
